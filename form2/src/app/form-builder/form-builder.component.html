@@ -1,0 +1,77 @@
+<div class="container">
+    <h1>FormBuilder</h1>
+    <form [formGroup]="registrationForm" (ngSubmit)="formBuilder()">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" formControlName="name">
+            <span *ngIf="registrationForm.get('name').touched && registrationForm.get('name').invalid">
+                <span *ngIf="registrationForm.get('name').hasError('required')">
+                    Fill the Field .
+                </span>
+            </span>
+
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">E-mail</label>
+            <input type="email" class="form-control" id="email" formControlName="email">
+            <span *ngIf="registrationForm.get('email').touched && registrationForm.get('email').pristine">
+                Fill the Field .
+            </span>
+            <span *ngIf="registrationForm.get('email').touched && registrationForm.get('email').invalid  && registrationForm.get('email').dirty">
+                Enter the valid email.
+            </span>
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone Number</label>
+            <input type="number" class="form-control" id="phone" formControlName="phone">
+            <span *ngIf="registrationForm.get('phone').touched && registrationForm.get('phone').pristine">
+                Fill the field .
+            </span>
+            <span *ngIf="registrationForm.get('phone').hasError('pattern')">
+                Enter the 10 Digit Number .
+            </span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Gender</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="female" value="Female" formControlName="gender">
+                <label class="form-check-label" for="female">
+                    Female
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="male" value="Male" formControlName="gender">
+                <label class="form-check-label" for="male">
+                    Male
+                </label>
+            </div>
+        </div>
+        <div formGroupName="address">
+            <label class="form-label">Address</label>
+            <div class="mb-3">
+                <label for="state" class="form-label">State</label>
+                <input type="text" class="form-control" id="state" formControlName="state">
+                <span *ngIf="registrationForm.controls.address.get('state').touched && registrationForm.controls.address.get('state').invalid">
+                    Fill the field .
+                </span>
+            </div>
+            <div class="mb-3">
+                <label for="city" class="form-label">City</label>
+                <input type="text" class="form-control" id="city" formControlName="city">
+                <span *ngIf="registrationForm.controls.address.get('city').touched && registrationForm.controls.address.get('city').invalid">
+                    Fill the field .
+                </span>
+            </div>
+            <div class="mb-3">
+                <label for="pinCode" class="form-label">Pin Code</label>
+                <input type="number" class="form-control" id="pinCode" formControlName="pinCode">
+                <span *ngIf="registrationForm.controls.address.get('pinCode').touched && registrationForm.controls.address.get('pinCode').invalid">
+                    Fill the field .
+                </span>
+            </div>
+        </div>
+        <!-- <button type="submit" class="btn btn-primary me-3" [disabled]="!registrationForm.valid">Submit</button> -->
+        <button type="submit" class="btn btn-primary me-3">Submit</button>
+        <button class="btn btn-danger" (click)="reset()">Reset</button>
+    </form>
+</div>
